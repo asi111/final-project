@@ -1,0 +1,59 @@
+{
+  "data": [
+    {
+      "nav": [
+        {
+          "name": "image",
+          "type": "image",
+          "value": "./images/logo.webp",
+          "positionsImage":{
+            "x":0,
+            "y":0
+          }
+        },
+        {
+          "name": "home",
+          "type": "text",
+          "value": "Home",
+          "positionsHome": {
+          "x":0,
+          "y":0
+          }
+        },
+        {
+          "name": "about",
+          "type": "text",
+          "value": "about"
+          
+        },
+        {
+          "name": "contact",
+          "type": "text",
+          "value": "contact"
+        
+        }
+      ],
+      
+
+      "main": [
+        {
+          "name": "title",
+          "type": "text",
+          "value": "Create Your Home page Website  FAST & Easy!"
+        },
+        {
+          "name": "description",
+          "type": "text",
+          "value": "Choose the fill texts, logo and links and your Home page is ready."
+        },
+
+        {
+          "name": "button",
+          "type": "button",
+          "value": "larne more"
+        }
+      ]
+      
+    }
+  ]
+}
