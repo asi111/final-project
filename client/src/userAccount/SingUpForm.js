@@ -11,6 +11,7 @@ import { positionsContext } from "../useContext/PositionsContext";
 export default function SingUpForm() {
   const [auth, setAuth] = useContext(authContext);
   const [data, setData] = useContext(dataContext);
+  
 
   const [singUpEmail, setSingUpEmail] = useState(null);
   const [singUPPassword, setSingUPPassword] = useState(null);
@@ -56,8 +57,8 @@ export default function SingUpForm() {
 
       const addTemplateUser = async () => {
         let userTemplateBody = {
-          main: data[0]?.main || [],
-          nav: data[0]?.nav || [],
+          main: data[0]?.main ,
+          nav: data[0]?.nav,
           email: response.data.email,
           positionsImage: positionsImage,
           positionsHome: positionsHome,
@@ -68,6 +69,7 @@ export default function SingUpForm() {
           positionsDescription: positionsDescription,
           positionsButton: positionsButton,
         };
+      console.log(userTemplateBody);
 
         try {
           const response = await axios.post("/EditorPage", userTemplateBody);
@@ -155,7 +157,7 @@ export default function SingUpForm() {
         {loading ? (
           "loading"
         ) : (
-          <Button type="submit" className="btn-lg btn-dark btn-block">
+          <Button disabled={data[0] ? false : true} type="submit" className="btn-lg btn-dark btn-block">
             singUp
           </Button>
         )}

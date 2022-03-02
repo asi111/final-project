@@ -30,11 +30,9 @@ const NavBar = () => {
     setPositionsButton,
   ] = useContext(positionsContext);
 
-  const [redirectToLoginForm, setRedirectToLoginForm] = useState(false);
-
   return (
     <div>
-      {redirectToLoginForm ? <Redirect to="LoginForm" /> : null}
+      {!auth ? <Redirect to="LoginForm" /> : null}
 
       <ReactBootStrap.Navbar
         collapseOnSelect
@@ -70,8 +68,7 @@ const NavBar = () => {
 
             {auth ? (
               <Button
-                onClick={() => {
-                  setRedirectToLoginForm(true);
+                onClick={() => { 
                   setAuth(null);
                   setPositionsImage(null);
                   setPositionsAbout(null);
@@ -85,6 +82,11 @@ const NavBar = () => {
                   localStorage.removeItem("posImage");
                   localStorage.removeItem("posHome");
                   localStorage.removeItem("posAbout");
+                  localStorage.removeItem("posContact");
+                  localStorage.removeItem("posNewItem");
+                  localStorage.removeItem("posTitle");
+                  localStorage.removeItem("posDescription");
+                  localStorage.removeItem("posButton");
                 }}
               >
                 logout

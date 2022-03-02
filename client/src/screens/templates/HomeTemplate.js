@@ -36,9 +36,6 @@ export default function HomeTemplate() {
     setPositionsButton,
   ] = useContext(positionsContext);
 
-  console.log("home tamplate", data[0]);
-  console.log(positionsHome);
-
   useEffect(() => {
     const existingPosImage = JSON.parse(localStorage.getItem("posImage"));
     const existingPosHome = JSON.parse(localStorage.getItem("posHome"));

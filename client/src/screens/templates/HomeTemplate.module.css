@@ -89,14 +89,6 @@ ul {
   cursor: move;
 }
 
-/* .menuBtn{
-  position: absolute;
-  top: 30px;
-  right: 30px;
-  width: 40px;
-  cursor: move;
-  
-} */
 
 @media only screen and (max-width:850px){
 
@@ -114,8 +106,8 @@ ul {
   
 
   .logo{
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     margin-top:0;
     margin-left: 0;
   }
@@ -137,7 +129,7 @@ ul {
   .navLinks a {
     text-decoration: none;
     cursor: move;
-    font-size: 9px;
+    font-size: 10px;
     font-weight: bold;
   }
 

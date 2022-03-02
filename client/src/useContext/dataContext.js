@@ -7,11 +7,12 @@ export const dataContext = createContext();
 export const DataProvider = (props) => {
   const [auth, setAuth] = useContext(authContext);
   const [data, setData] = useState([]);
+ 
 
   const getDefaultTemplate = async () => {
     try {
       const responseData = await axios.get(
-        `/EditorPage/api/621bd4a31bfe630be8a2db4d`
+        `/EditorPage/api/621f8c728c6878ebb6f89de6`
       );
       setData([responseData.data]);
     } catch (error) {
@@ -21,7 +22,7 @@ export const DataProvider = (props) => {
 
   useEffect(() => {
     if (!auth) return getDefaultTemplate();
-  }, []);
+  }, [auth]);
 
   return (
     <dataContext.Provider value={[data, setData]}>
