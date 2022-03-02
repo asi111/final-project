@@ -10,6 +10,7 @@ import { positionsContext } from "../useContext/PositionsContext";
 
 const NavBar = () => {
   const [auth, setAuth] = useContext(authContext);
+  
   const [
     positionsImage,
     setPositionsImage,
@@ -29,11 +30,11 @@ const NavBar = () => {
     setPositionsButton,
   ] = useContext(positionsContext);
 
-  const [redirectToSingUpForm, setRedirectToSingUpForm] = useState(false);
+  const [redirectToLoginForm, setRedirectToLoginForm] = useState(false);
 
   return (
     <div>
-      {redirectToSingUpForm ? <Redirect to="SingUpForm" /> : null}
+      {redirectToLoginForm ? <Redirect to="LoginForm" /> : null}
 
       <ReactBootStrap.Navbar
         collapseOnSelect
@@ -70,6 +71,7 @@ const NavBar = () => {
             {auth ? (
               <Button
                 onClick={() => {
+                  setRedirectToLoginForm(true);
                   setAuth(null);
                   setPositionsImage(null);
                   setPositionsAbout(null);
@@ -83,8 +85,6 @@ const NavBar = () => {
                   localStorage.removeItem("posImage");
                   localStorage.removeItem("posHome");
                   localStorage.removeItem("posAbout");
-
-                  setRedirectToSingUpForm(true);
                 }}
               >
                 logout

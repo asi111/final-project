@@ -1,12 +1,10 @@
 import { DataProvider } from "./useContext/dataContext";
-
 import EditorPage from "./screens/EditorPage";
 import { AuthProvider } from "./useContext/authContext";
 import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Redirect,
 } from "react-router-dom";
 import Navbar from "./components/NavBar";
 import Home from "./screens/Home";

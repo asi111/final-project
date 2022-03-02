@@ -1,9 +1,6 @@
-
 import { authContext } from "./authContext";
 import axios from "axios";
-
 import React, { createContext, useContext, useEffect, useState } from "react";
-
 
 export const dataContext = createContext();
 
@@ -11,19 +8,10 @@ export const DataProvider = (props) => {
   const [auth, setAuth] = useContext(authContext);
   const [data, setData] = useState([]);
 
-  const getUserData = async () => {
-    try {
-      const response = await axios.get(`/EditorPage/${auth}`);
-      setData([response.data]);
-    } catch (error) {
-      throw error;
-    }
-  };
-
-  const getMainTemplate = async () => {
+  const getDefaultTemplate = async () => {
     try {
       const responseData = await axios.get(
-        `/EditorPage/api/62036fec2473da6dc1710657`
+        `/EditorPage/api/621bd4a31bfe630be8a2db4d`
       );
       setData([responseData.data]);
     } catch (error) {
@@ -32,11 +20,7 @@ export const DataProvider = (props) => {
   };
 
   useEffect(() => {
-    if (auth) {
-      getUserData();
-    } else {
-      getMainTemplate();
-    }
+    if (!auth) return getDefaultTemplate();
   }, []);
 
   return (

@@ -2,11 +2,12 @@ import React, { useContext, useEffect, useState, useRef } from "react";
 import { dataContext } from "../../useContext/dataContext";
 import style from "./HomeTemplate.module.css";
 import Draggable from "react-draggable";
-import axios from "axios";
 import { positionsContext } from "../../useContext/PositionsContext";
+import { authContext } from "../../useContext/authContext";
 
 export default function HomeTemplate() {
-  const [hasLoaded, setHasLoaded] = useState(false);
+  const [data, setData] = useContext(dataContext);
+  const [auth, setAuth] = useContext(authContext);
   const imageRef = useRef(null);
   const homeRef = useRef(null);
   const aboutRef = useRef(null);
@@ -35,61 +36,62 @@ export default function HomeTemplate() {
     setPositionsButton,
   ] = useContext(positionsContext);
 
-  const [data, setData] = useContext(dataContext);
+  console.log("home tamplate", data[0]);
+  console.log(positionsHome);
 
-  useEffect(() => {
-    const existingPosImage = JSON.parse(localStorage.getItem("posImage"));
-    const existingPosHome = JSON.parse(localStorage.getItem("posHome"));
-    const existingPosAbout = JSON.parse(localStorage.getItem("posAbout"));
-    const existingPosContact = JSON.parse(localStorage.getItem("posContact"));
-    const existingPosNewItem = JSON.parse(localStorage.getItem("posNewItem"));
-    const existingPosTitle = JSON.parse(localStorage.getItem("posTitle"));
-    const existingPosDescription = JSON.parse(
-      localStorage.getItem("posDescription")
-    );
-    const existingPosButton = JSON.parse(localStorage.getItem("posButton"));
+  // useEffect(() => {
+  //   const existingPosImage = JSON.parse(localStorage.getItem("posImage"));
+  //   const existingPosHome = JSON.parse(localStorage.getItem("posHome"));
+  //   const existingPosAbout = JSON.parse(localStorage.getItem("posAbout"));
+  //   const existingPosContact = JSON.parse(localStorage.getItem("posContact"));
+  //   const existingPosNewItem = JSON.parse(localStorage.getItem("posNewItem"));
+  //   const existingPosTitle = JSON.parse(localStorage.getItem("posTitle"));
+  //   const existingPosDescription = JSON.parse(
+  //     localStorage.getItem("posDescription")
+  //   );
+  //   const existingPosButton = JSON.parse(localStorage.getItem("posButton"));
 
-    if (
-      (existingPosImage || existingPosHome || existingPosAbout,
-      existingPosContact,
-      existingPosNewItem,
-      existingPosTitle,
-      existingPosDescription,
-      existingPosButton)
-    ) {
-      setPositionsImage(existingPosImage);
-      setPositionsHome(existingPosHome);
-      setPositionsAbout(existingPosAbout);
-      setPositionsContact(existingPosContact);
-      setPositionsNewItem(existingPosNewItem);
-      setPositionsTitle(existingPosTitle);
-      setPositionsDescription(existingPosDescription);
-      setPositionsButton(existingPosButton);
-    }
-  }, []);
+  //   if (
+  //     (existingPosImage || existingPosHome || existingPosAbout,
+  //     existingPosContact,
+  //     existingPosNewItem,
+  //     existingPosTitle,
+  //     existingPosDescription,
+  //     existingPosButton)
+  //   ) {
+  //     setPositionsImage(existingPosImage);
+  //     setPositionsHome(existingPosHome);
+  //     setPositionsAbout(existingPosAbout);
+  //     setPositionsContact(existingPosContact);
+  //     setPositionsNewItem(existingPosNewItem);
+  //     setPositionsTitle(existingPosTitle);
+  //     setPositionsDescription(existingPosDescription);
+  //     setPositionsButton(existingPosButton);
+  //   }
+  // }, []);
 
-  useEffect(() => {
-    localStorage.setItem(`posImage`, JSON.stringify(positionsImage));
-    localStorage.setItem(`posHome`, JSON.stringify(positionsHome));
-    localStorage.setItem(`posAbout`, JSON.stringify(positionsAbout));
-    localStorage.setItem(`posContact`, JSON.stringify(positionsContact));
-    localStorage.setItem(`posNewItem`, JSON.stringify(positionsNewItem));
-    localStorage.setItem(`posTitle`, JSON.stringify(positionsTitle));
-    localStorage.setItem(
-      `posDescription`,
-      JSON.stringify(positionsDescription)
-    );
-    localStorage.setItem(`posButton`, JSON.stringify(positionsButton));
-  }, [
-    positionsImage,
-    positionsHome,
-    positionsAbout,
-    positionsContact,
-    positionsNewItem,
-    positionsTitle,
-    positionsDescription,
-    positionsButton,
-  ]);
+  // useEffect(() => {
+  //   localStorage.setItem(`posImage`, JSON.stringify(positionsImage));
+  //   localStorage.setItem(`posHome`, JSON.stringify(positionsHome));
+  //   localStorage.setItem(`posAbout`, JSON.stringify(positionsAbout));
+  //   localStorage.setItem(`posContact`, JSON.stringify(positionsContact));
+  //   localStorage.setItem(`posNewItem`, JSON.stringify(positionsNewItem));
+  //   localStorage.setItem(`posTitle`, JSON.stringify(positionsTitle));
+  //   localStorage.setItem(
+  //     `posDescription`,
+  //     JSON.stringify(positionsDescription)
+  //   );
+  //   localStorage.setItem(`posButton`, JSON.stringify(positionsButton));
+  // }, [
+  //   positionsImage,
+  //   positionsHome,
+  //   positionsAbout,
+  //   positionsContact,
+  //   positionsNewItem,
+  //   positionsTitle,
+  //   positionsDescription,
+  //   positionsButton,
+  // ]);
 
   const handleStop = (e, pos) => {
     let tempPositionsImage = { ...positionsImage };
@@ -173,9 +175,14 @@ export default function HomeTemplate() {
           <div>
             <Draggable
               defaultPosition={
-                positionsImage === null
+                !positionsImage && !auth
                   ? { x: 0, y: 0 }
-                  : { x: positionsImage.image.x, y: positionsImage.image.y }
+                  : data[0]?.positionsImage
+                  ? {
+                      x: data[0]?.positionsImage.image.x,
+                      y: data[0]?.positionsImage.image.y,
+                    }
+                  : { x: 0, y: 0 }
               }
               key={index}
               nodeRef={imageRef}
@@ -207,9 +214,14 @@ export default function HomeTemplate() {
           elementsContainer.home = (
             <Draggable
               defaultPosition={
-                positionsHome === null
+                !positionsHome && !auth
                   ? { x: 0, y: 0 }
-                  : { x: positionsHome.home.x, y: positionsHome.home.y }
+                  : data[0]?.positionsHome
+                  ? {
+                      x: data[0]?.positionsHome.home.x,
+                      y: data[0]?.positionsHome.home.y,
+                    }
+                  : { x: 0, y: 0 }
               }
               key={index}
               nodeRef={homeRef}
@@ -226,11 +238,16 @@ export default function HomeTemplate() {
         case "about":
           elementsContainer.about = (
             <Draggable
-              defaultPosition={
-                positionsAbout === null
-                  ? { x: 0, y: 0 }
-                  : { x: positionsAbout.about.x, y: positionsAbout.about.y }
-              }
+            defaultPosition={
+              !positionsAbout && !auth
+                ? { x: 0, y: 0 }
+                : data[0]?.positionsAbout
+                ? {
+                    x: data[0]?.positionsAbout.about.x,
+                    y: data[0]?.positionsAbout.about.y,
+                  }
+                : { x: 0, y: 0 }
+            }
               key={index}
               nodeRef={aboutRef}
               onStop={handleStop}
@@ -247,14 +264,16 @@ export default function HomeTemplate() {
         case "contact":
           elementsContainer.contact = (
             <Draggable
-              defaultPosition={
-                positionsContact === null
-                  ? { x: 0, y: 0 }
-                  : {
-                      x: positionsContact.contact.x,
-                      y: positionsContact.contact.y,
-                    }
-              }
+            defaultPosition={
+              !positionsContact && !auth
+                ? { x: 0, y: 0 }
+                : data[0]?.positionsContact
+                ? {
+                    x: data[0]?.positionsContact.contact.x,
+                    y: data[0]?.positionsContact.contact.y,
+                  }
+                : { x: 0, y: 0 }
+            }
               key={index}
               nodeRef={contactRef}
               onStop={handleStop}
@@ -270,14 +289,16 @@ export default function HomeTemplate() {
         case "newItem":
           elementsContainer.newItem.push(
             <Draggable
-              defaultPosition={
-                positionsNewItem === null
-                  ? { x: 0, y: 0 }
-                  : {
-                      x: positionsNewItem.newItem.x,
-                      y: positionsNewItem.newItem.y,
-                    }
-              }
+            defaultPosition={
+              !positionsNewItem && !auth
+                ? { x: 0, y: 0 }
+                : data[0]?.positionsNewItem
+                ? {
+                    x: data[0]?.positionsNewItem.newItem.x,
+                    y: data[0]?.positionsNewItem.newItem.y,
+                  }
+                : { x: 0, y: 0 }
+            }
               key={index}
               nodeRef={newItemRef}
               onStop={handleStop}
@@ -320,11 +341,16 @@ export default function HomeTemplate() {
         case "title":
           elementsMainContainer.title = (
             <Draggable
-              defaultPosition={
-                positionsTitle === null
-                  ? { x: 0, y: 0 }
-                  : { x: positionsTitle.title.x, y: positionsTitle.title.y }
-              }
+            defaultPosition={
+              !positionsTitle && !auth
+                ? { x: 0, y: 0 }
+                : data[0]?.positionsTitle
+                ? {
+                    x: data[0]?.positionsTitle.title.x,
+                    y: data[0]?.positionsTitle.title.y,
+                  }
+                : { x: 0, y: 0 }
+            }
               key={index}
               nodeRef={titleRef}
               onStop={handleStop}
@@ -340,14 +366,16 @@ export default function HomeTemplate() {
         case "description":
           elementsMainContainer.description = (
             <Draggable
-              defaultPosition={
-                positionsDescription === null
-                  ? { x: 0, y: 0 }
-                  : {
-                      x: positionsDescription.description.x,
-                      y: positionsDescription.description.y,
-                    }
-              }
+            defaultPosition={
+              !positionsDescription && !auth
+                ? { x: 0, y: 0 }
+                : data[0]?.positionsDescription
+                ? {
+                    x: data[0]?.positionsDescription.description.x,
+                    y: data[0]?.positionsDescription.description.y,
+                  }
+                : { x: 0, y: 0 }
+            }
               key={index}
               nodeRef={descriptionRef}
               onStop={handleStop}
@@ -364,11 +392,16 @@ export default function HomeTemplate() {
         case "button":
           elementsMainContainer.button = (
             <Draggable
-              defaultPosition={
-                positionsButton === null
-                  ? { x: 0, y: 0 }
-                  : { x: positionsButton.button.x, y: positionsButton.button.y }
-              }
+            defaultPosition={
+              !positionsButton && !auth
+                ? { x: 0, y: 0 }
+                : data[0]?.positionsButton
+                ? {
+                    x: data[0]?.positionsButton.button.x,
+                    y: data[0]?.positionsButton.button.y,
+                  }
+                : { x: 0, y: 0 }
+            }
               key={index}
               nodeRef={buttonRef}
               onStop={handleStop}

@@ -16,7 +16,6 @@ export default function SingUpForm() {
   const [singUPPassword, setSingUPPassword] = useState(null);
   const [confirmPassword, setConfirmPassword] = useState(null);
   const [redirectToLogin, setRedirectToLogin] = useState(false);
-  const [redirectToHome, setRedirectToHome] = useState(false);
   const [loading, setLoading] = useState(false);
   const [emailErr, setEmailErr] = useState(false);
   const [PasswordErr, setPasswordErr] = useState(false);
@@ -42,8 +41,9 @@ export default function SingUpForm() {
   ] = useContext(positionsContext);
 
   useEffect(() => {
+
     return () => {};
-  });
+  },[auth]);
 
   const singUp = async () => {
     try {

@@ -14,8 +14,8 @@ export default function EditorPage() {
           <HomeTemplate />
         </div>
         <div className={style.editor}>
-          {" "}
-          <Editor />{" "}
+       
+          <Editor />
         </div>
       </div>
     </>

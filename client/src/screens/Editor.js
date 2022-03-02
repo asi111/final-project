@@ -1,7 +1,7 @@
 import React, { useContext, useRef, useState } from "react";
 import { dataContext } from "../useContext/dataContext";
 import { authContext } from "../useContext/authContext";
-import EditorPage from "./EditorPage";
+
 import style from "./Editor.module.css";
 import { RiChatDeleteFill } from "react-icons/ri";
 import { MdAddTask } from "react-icons/md";
@@ -58,7 +58,7 @@ export default function Editor() {
       id: new Date().getTime(),
       type: "text",
       name: "newItem",
-      value: "added",
+      value: "newLink",
     });
 
     setData(tempData);
@@ -107,6 +107,16 @@ export default function Editor() {
     }
   };
 
+  const removeSelectedImage = () => {
+    const tempData = [...data];
+    tempData[0]?.nav.forEach((element) => {
+      if (element.type === "image") {
+        element.value = null;
+        setData(tempData);
+      }
+    });
+  };
+
   return (
     <div className={style.container}>
       <div className={style.form}>
@@ -147,7 +157,7 @@ export default function Editor() {
           <br />
           <div className={style.box}>
             <RiChatDeleteFill
-              // onClick={removeSelectedImage}
+              onClick={removeSelectedImage}
               style={style.delete}
             ></RiChatDeleteFill>
             <input

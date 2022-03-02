@@ -4,7 +4,6 @@ import { authAPI_KEY } from "./constants";
 import style from "./LoginForm.module.css";
 import { Form, Button, FormGroup, Label, Input } from "reactstrap";
 import { authContext } from "../useContext/authContext";
-import { dataContext } from "../useContext/dataContext";
 import { Redirect } from "react-router-dom";
 
 export default function LoginForm() {
@@ -14,8 +13,7 @@ export default function LoginForm() {
   const [PasswordErr, setPasswordErr] = useState(false);
   const [loading, setLoading] = useState(false);
   const [auth, setAuth] = useContext(authContext);
-  const [data, setData] = useContext(dataContext);
-
+ 
   const [redirectToHome, setRedirectToHome] = useState(false);
 
   useEffect(() => {
@@ -32,7 +30,6 @@ export default function LoginForm() {
       );
 
       setAuth(response.data.email);
-      //  localStorage.setItem("user", JSON.stringify(response.data.email));
     } catch (error) {
       throw error;
     }

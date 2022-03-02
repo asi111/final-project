@@ -9,7 +9,6 @@ export const LocalStorageProvide = (props)=>{
     const localStorageKey = "user"
     const [auth , setAuth] = useContext(authContext)
     const [localStorageState,setLocalStorageState] = useState(localStorageKey)
-  
     localStorage.setItem(localStorageKey , JSON.stringify(auth))
 
     return (
