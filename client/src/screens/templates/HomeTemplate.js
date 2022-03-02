@@ -39,59 +39,59 @@ export default function HomeTemplate() {
   console.log("home tamplate", data[0]);
   console.log(positionsHome);
 
-  // useEffect(() => {
-  //   const existingPosImage = JSON.parse(localStorage.getItem("posImage"));
-  //   const existingPosHome = JSON.parse(localStorage.getItem("posHome"));
-  //   const existingPosAbout = JSON.parse(localStorage.getItem("posAbout"));
-  //   const existingPosContact = JSON.parse(localStorage.getItem("posContact"));
-  //   const existingPosNewItem = JSON.parse(localStorage.getItem("posNewItem"));
-  //   const existingPosTitle = JSON.parse(localStorage.getItem("posTitle"));
-  //   const existingPosDescription = JSON.parse(
-  //     localStorage.getItem("posDescription")
-  //   );
-  //   const existingPosButton = JSON.parse(localStorage.getItem("posButton"));
+  useEffect(() => {
+    const existingPosImage = JSON.parse(localStorage.getItem("posImage"));
+    const existingPosHome = JSON.parse(localStorage.getItem("posHome"));
+    const existingPosAbout = JSON.parse(localStorage.getItem("posAbout"));
+    const existingPosContact = JSON.parse(localStorage.getItem("posContact"));
+    const existingPosNewItem = JSON.parse(localStorage.getItem("posNewItem"));
+    const existingPosTitle = JSON.parse(localStorage.getItem("posTitle"));
+    const existingPosDescription = JSON.parse(
+      localStorage.getItem("posDescription")
+    );
+    const existingPosButton = JSON.parse(localStorage.getItem("posButton"));
 
-  //   if (
-  //     (existingPosImage || existingPosHome || existingPosAbout,
-  //     existingPosContact,
-  //     existingPosNewItem,
-  //     existingPosTitle,
-  //     existingPosDescription,
-  //     existingPosButton)
-  //   ) {
-  //     setPositionsImage(existingPosImage);
-  //     setPositionsHome(existingPosHome);
-  //     setPositionsAbout(existingPosAbout);
-  //     setPositionsContact(existingPosContact);
-  //     setPositionsNewItem(existingPosNewItem);
-  //     setPositionsTitle(existingPosTitle);
-  //     setPositionsDescription(existingPosDescription);
-  //     setPositionsButton(existingPosButton);
-  //   }
-  // }, []);
+    if (
+      (existingPosImage || existingPosHome || existingPosAbout,
+      existingPosContact,
+      existingPosNewItem,
+      existingPosTitle,
+      existingPosDescription,
+      existingPosButton)
+    ) {
+      setPositionsImage(existingPosImage);
+      setPositionsHome(existingPosHome);
+      setPositionsAbout(existingPosAbout);
+      setPositionsContact(existingPosContact);
+      setPositionsNewItem(existingPosNewItem);
+      setPositionsTitle(existingPosTitle);
+      setPositionsDescription(existingPosDescription);
+      setPositionsButton(existingPosButton);
+    }
+  }, []);
 
-  // useEffect(() => {
-  //   localStorage.setItem(`posImage`, JSON.stringify(positionsImage));
-  //   localStorage.setItem(`posHome`, JSON.stringify(positionsHome));
-  //   localStorage.setItem(`posAbout`, JSON.stringify(positionsAbout));
-  //   localStorage.setItem(`posContact`, JSON.stringify(positionsContact));
-  //   localStorage.setItem(`posNewItem`, JSON.stringify(positionsNewItem));
-  //   localStorage.setItem(`posTitle`, JSON.stringify(positionsTitle));
-  //   localStorage.setItem(
-  //     `posDescription`,
-  //     JSON.stringify(positionsDescription)
-  //   );
-  //   localStorage.setItem(`posButton`, JSON.stringify(positionsButton));
-  // }, [
-  //   positionsImage,
-  //   positionsHome,
-  //   positionsAbout,
-  //   positionsContact,
-  //   positionsNewItem,
-  //   positionsTitle,
-  //   positionsDescription,
-  //   positionsButton,
-  // ]);
+  useEffect(() => {
+    localStorage.setItem(`posImage`, JSON.stringify(positionsImage));
+    localStorage.setItem(`posHome`, JSON.stringify(positionsHome));
+    localStorage.setItem(`posAbout`, JSON.stringify(positionsAbout));
+    localStorage.setItem(`posContact`, JSON.stringify(positionsContact));
+    localStorage.setItem(`posNewItem`, JSON.stringify(positionsNewItem));
+    localStorage.setItem(`posTitle`, JSON.stringify(positionsTitle));
+    localStorage.setItem(
+      `posDescription`,
+      JSON.stringify(positionsDescription)
+    );
+    localStorage.setItem(`posButton`, JSON.stringify(positionsButton));
+  }, [
+    positionsImage,
+    positionsHome,
+    positionsAbout,
+    positionsContact,
+    positionsNewItem,
+    positionsTitle,
+    positionsDescription,
+    positionsButton,
+  ]);
 
   const handleStop = (e, pos) => {
     let tempPositionsImage = { ...positionsImage };
