@@ -37,7 +37,7 @@ export default function Home() {
       <div>
         <h2>Create professional looking website.</h2>
         <h1>FAST & Easy!</h1>
-        {!loading ? <div className={style.loader}></div> : auth ? (
+        {loading ? <div className={style.loader}></div> : auth ? (
           <Button onClick={() => setRedirectToEditorPage(true)}> START </Button>
         ) : (
           <Button onClick={() => setRedirectToSingUpForm(true)}> START </Button>
